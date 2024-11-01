@@ -7,7 +7,7 @@ public class QuickSort
         quickSort(array, 0, array.length - 1);
     }
 
-    static void quickSort(int[] arr, int low, int high)
+    private static void quickSort(int[] arr, int low, int high)
     {
         if (low < high)
         {
@@ -17,7 +17,7 @@ public class QuickSort
         }
     }
 
-    static int partition(int[] arr, int lowIndex, int highIndex)
+    private static int partition(int[] arr, int lowIndex, int highIndex)
     {
         int pivot = arr[highIndex];
         int indexBeforePivotInsert = lowIndex - 1;
@@ -33,7 +33,7 @@ public class QuickSort
         return indexBeforePivotInsert + 1;
     }
 
-    static void swap(int[] arr, int i, int j)
+    private static void swap(int[] arr, int i, int j)
     {
         if(i != j)
         {
