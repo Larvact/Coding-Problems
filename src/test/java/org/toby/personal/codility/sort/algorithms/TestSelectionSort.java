@@ -1,7 +1,8 @@
-package org.toby.personal.codility.sort;
+package org.toby.personal.codility.sort.algorithms;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.toby.personal.codility.sort.algorithms.SelectionSort;
 
 class TestSelectionSort
 {

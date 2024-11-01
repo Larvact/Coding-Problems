@@ -1,4 +1,4 @@
-package org.toby.personal.codility.sort;
+package org.toby.personal.codility.sort.algorithms;
 
 public class CountingSort
 {
