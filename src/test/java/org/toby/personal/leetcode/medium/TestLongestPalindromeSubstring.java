@@ -33,7 +33,4 @@ class TestLongestPalindromeSubstring
     {
         Assertions.assertEquals(expectedSubstring, LongestPalindromeSubstring.getLongestPalindromeSubstring(string));
     }
-
-
-
 }

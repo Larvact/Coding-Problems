@@ -16,8 +16,12 @@ public class LongestPalindromeSubstring
         {
             var localSubstring = String.valueOf(string.charAt(characterIndex));
             var localSubstringIsPalindrome = true;
-            var palindromeSearchIncrementingCount = 1;
+            if(longestPalindromeSubstring.length() < 2)
+            {
+                longestPalindromeSubstring = localSubstring;
+            }
 
+            var palindromeSearchIncrementingCount = 1;
             while (localSubstringIsPalindrome && characterIndex - palindromeSearchIncrementingCount > -1 && characterIndex + palindromeSearchIncrementingCount < stringCharacterArray.length - 1)
             {
                 final var nextLhsChar = String.valueOf(stringCharacterArray[characterIndex - palindromeSearchIncrementingCount]);
