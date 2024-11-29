@@ -27,7 +27,8 @@ class TestLongestPalindromeSubstring
                 Arguments.of("cbbd", "bb"),
                 Arguments.of("gdsgbbbrfh", "bbb"),
                 Arguments.of("bbbgdsgrfh", "bbb"),
-                Arguments.of("gdsgrfhbbb", "bbb")
+                Arguments.of("gdsgrfhbbb", "bbb"),
+                Arguments.of("ticktickrrkcitkcit", "ticktickrrkcitkcit")
         );
     }
 
