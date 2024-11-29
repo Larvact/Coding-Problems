@@ -9,43 +9,50 @@ public class LongestPalindromeSubstring
     {
         if(Objects.isNull(string)){return null;}
 
-        var longestPalindromeSubstring = "";
-        var stringCharacterArray = string.toCharArray();
-
-        for(char characterIndex = 0; characterIndex < string.length(); characterIndex++)
+        var longestPalindrome = "";
+        for(char pivotIndex = 0; pivotIndex < string.length(); pivotIndex++)
         {
-            var localSubstring = String.valueOf(string.charAt(characterIndex));
-            var localSubstringIsPalindrome = true;
-            if(longestPalindromeSubstring.length() < 2)
+            var localPalindrome = String.valueOf(string.charAt(pivotIndex));
+            if(longestPalindrome.length() < 2)
             {
-                longestPalindromeSubstring = localSubstring;
+                longestPalindrome = localPalindrome;
             }
 
-            var palindromeSearchIncrementingCount = 1;
-            while (localSubstringIsPalindrome && shouldContinuePalindromeSearch(characterIndex, palindromeSearchIncrementingCount, string.length()))
+            var localIsPalindrome = true;
+            var palindromeSearchCount = 1;
+            while (localIsPalindrome && shouldContinuePalindromeSearch(pivotIndex, palindromeSearchCount, string.length()))
             {
-                final var nextLhsChar = String.valueOf(stringCharacterArray[characterIndex - palindromeSearchIncrementingCount]);
-                final var nextRhsChar = String.valueOf(stringCharacterArray[characterIndex + palindromeSearchIncrementingCount]);
+                final var nextLhsChar = getStringAtIndex(string, pivotIndex - palindromeSearchCount);
+                final var nextRhsChar = getStringAtIndex(string, pivotIndex + palindromeSearchCount);
                 if(nextLhsChar.equals(nextRhsChar))
                 {
-                    localSubstring = nextLhsChar + localSubstring + nextRhsChar;
-                    if(localSubstring.length() > longestPalindromeSubstring.length())
+                    localPalindrome = nextLhsChar + localPalindrome + nextRhsChar;
+                    if(localPalindrome.length() > longestPalindrome.length())
                     {
-                        longestPalindromeSubstring = localSubstring;
+                        longestPalindrome = localPalindrome;
                     }
-                    palindromeSearchIncrementingCount++;
+                    palindromeSearchCount++;
                 }
                 else
                 {
-                    localSubstringIsPalindrome = false;
+                    localIsPalindrome = false;
                 }
             }
         }
-        return longestPalindromeSubstring;
+        return longestPalindrome;
     }
 
     private static boolean shouldContinuePalindromeSearch(final char pivotIndex, final int searchCount, final int searchLimitUpperBoundary)
     {
         return pivotIndex - searchCount > -1 && pivotIndex + searchCount < searchLimitUpperBoundary;
+    }
+
+    private static String getStringAtIndex(final String string, final int index)
+    {
+        if(index < 0 || index > string.length() - 1)
+        {
+            throw new IllegalArgumentException(String.format("Index [%s] is out of bounds", index));
+        }
+        return string.substring(index, index + 1);
     }
 }
