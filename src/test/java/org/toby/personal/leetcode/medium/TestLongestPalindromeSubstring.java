@@ -22,7 +22,9 @@ class TestLongestPalindromeSubstring
         return Stream.of(Arguments.of("", ""),
                 Arguments.of("a", "a"),
                 Arguments.of("ab", "b"),
+                Arguments.of("bb", "bb"),
                 Arguments.of("cabag", "aba"),
+                Arguments.of("cbbd", "bb"),
                 Arguments.of("gdsgbbbrfh", "bbb"),
                 Arguments.of("bbbgdsgrfh", "bbb"),
                 Arguments.of("gdsgrfhbbb", "bbb")
