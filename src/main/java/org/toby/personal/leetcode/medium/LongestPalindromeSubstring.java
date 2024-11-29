@@ -12,37 +12,41 @@ public class LongestPalindromeSubstring
         var longestPalindrome = "";
         for(char pivotIndex = 0; pivotIndex < string.length(); pivotIndex++)
         {
-            var localPalindrome = String.valueOf(string.charAt(pivotIndex));
             if(longestPalindrome.length() < 2)
             {
-                longestPalindrome = localPalindrome;
+                longestPalindrome = getStringAtIndex(string, pivotIndex);
             }
-
-            var localIsPalindrome = true;
-            var palindromeSearchCount = 1;
-            while (localIsPalindrome && shouldContinuePalindromeSearch(pivotIndex, palindromeSearchCount, string.length()))
+            final var longestPivotPalindrome = getLongestPivotPalindrome(string, pivotIndex);
+            if(longestPivotPalindrome.length() >= longestPalindrome.length())
             {
-                final var nextLhsChar = getStringAtIndex(string, pivotIndex - palindromeSearchCount);
-                final var nextRhsChar = getStringAtIndex(string, pivotIndex + palindromeSearchCount);
-                if(nextLhsChar.equals(nextRhsChar))
-                {
-                    localPalindrome = nextLhsChar + localPalindrome + nextRhsChar;
-                    if(localPalindrome.length() > longestPalindrome.length())
-                    {
-                        longestPalindrome = localPalindrome;
-                    }
-                    palindromeSearchCount++;
-                }
-                else
-                {
-                    localIsPalindrome = false;
-                }
+                longestPalindrome = longestPivotPalindrome;
             }
         }
         return longestPalindrome;
     }
 
-    private static boolean shouldContinuePalindromeSearch(final char pivotIndex, final int searchCount, final int searchLimitUpperBoundary)
+    private static String getLongestPivotPalindrome(final String fullString, char pivotIndex)
+    {
+        var pivotPalindrome = getStringAtIndex(fullString, pivotIndex);
+        var palindromeSearchCount = 1;
+        while (shouldContinuePalindromeSearch(pivotIndex, palindromeSearchCount, fullString.length()))
+        {
+            final var nextLhsChar = getStringAtIndex(fullString, pivotIndex - palindromeSearchCount);
+            final var nextRhsChar = getStringAtIndex(fullString, pivotIndex + palindromeSearchCount);
+            if(nextLhsChar.equals(nextRhsChar))
+            {
+                pivotPalindrome = nextLhsChar + pivotPalindrome + nextRhsChar;
+                palindromeSearchCount++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return pivotPalindrome;
+    }
+
+    private static boolean shouldContinuePalindromeSearch(final int pivotIndex, final int searchCount, final int searchLimitUpperBoundary)
     {
         return pivotIndex - searchCount > -1 && pivotIndex + searchCount < searchLimitUpperBoundary;
     }
