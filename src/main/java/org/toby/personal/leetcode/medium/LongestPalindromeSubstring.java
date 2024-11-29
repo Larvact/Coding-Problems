@@ -22,7 +22,7 @@ public class LongestPalindromeSubstring
             }
 
             var palindromeSearchIncrementingCount = 1;
-            while (localSubstringIsPalindrome && characterIndex - palindromeSearchIncrementingCount > -1 && characterIndex + palindromeSearchIncrementingCount < stringCharacterArray.length - 1)
+            while (localSubstringIsPalindrome && shouldContinuePalindromeSearch(characterIndex, palindromeSearchIncrementingCount, string.length()))
             {
                 final var nextLhsChar = String.valueOf(stringCharacterArray[characterIndex - palindromeSearchIncrementingCount]);
                 final var nextRhsChar = String.valueOf(stringCharacterArray[characterIndex + palindromeSearchIncrementingCount]);
@@ -42,5 +42,10 @@ public class LongestPalindromeSubstring
             }
         }
         return longestPalindromeSubstring;
+    }
+
+    private static boolean shouldContinuePalindromeSearch(final char pivotIndex, final int searchCount, final int searchLimitUpperBoundary)
+    {
+        return pivotIndex - searchCount > -1 && pivotIndex + searchCount < searchLimitUpperBoundary;
     }
 }
