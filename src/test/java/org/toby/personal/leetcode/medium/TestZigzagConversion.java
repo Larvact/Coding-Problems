@@ -29,10 +29,10 @@ class TestZigzagConversion
     private static Stream<Arguments> provideStringRowNumbersExpectedZigZagResult()
     {
         return Stream.of(
-                Arguments.of("PAYPALISHIRING", 1, "PAYPALISHIRING")
-                //Arguments.of("PAYPALISHIRING", 2, "PYAIHRNAPLSIIG"), //? Verify manually if others pass
-                //Arguments.of("PAYPALISHIRING", 3, "PAHNAPLSIIGYIR"),
-                //Arguments.of("PAYPALISHIRING", 4, "PINALSIGYAHRPI")
+                Arguments.of("PAYPALISHIRING", 1, "PAYPALISHIRING"),
+                Arguments.of("PAYPALISHIRING", 2, "PYAIHRNAPLSIIG"), //? Verify manually if others pass
+                Arguments.of("PAYPALISHIRING", 3, "PAHNAPLSIIGYIR"),
+                Arguments.of("PAYPALISHIRING", 4, "PINALSIGYAHRPI")
         );
     }
 

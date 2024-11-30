@@ -6,38 +6,25 @@ import java.util.stream.Collectors;
 
 public class ZigzagConversion
 {
-    public static String convertToZigZag(final String string, final int rowNum)
+    public static String convertToZigZag(final String string, final int numRows)
     {
-        if(Objects.isNull(string) || string.isBlank() || rowNum == 0)
+        if(Objects.isNull(string) || string.isBlank() || numRows == 0)
         {
             return "";
         }
-        //create rowNum arrays
-        final var resultArrays = new char[rowNum][string.length()];
-
-        //flag when insert index is 0
-        boolean isIndexFullInsert = true;
-        //track what array we are on
+        else if (numRows == 1)
+        {
+            return string;
+        }
+        final var resultArrays = new char[numRows][string.length()];
+        boolean isIndexFullInsert = false;
         var insertionIndex = 0;
         var insertionArrayIndex = 0;
-        //for letter in string
         for(int index = 0; index < string.length(); index++)
         {
             final var character = string.charAt(index);
             resultArrays[insertionArrayIndex][insertionIndex] = character;
-            insertionIndex += 1;
-        }
-
-
-        return Arrays.stream(resultArrays)
-                .map(String::valueOf)
-                .filter(arrayString -> !arrayString.isBlank())
-                .collect(Collectors.joining());
-    }
-}
-
-/*
-            if(insertionArrayIndex % (rowNum - 1) == 0)
+            if(insertionArrayIndex % (numRows - 1) == 0)
             {
                 isIndexFullInsert = !isIndexFullInsert;
             }
@@ -48,5 +35,13 @@ public class ZigzagConversion
             else
             {
                 insertionArrayIndex = insertionArrayIndex - 1;
+                insertionIndex += 1;
             }
- */
+        }
+        return Arrays.stream(resultArrays)
+                .map(String::valueOf)
+                .map(s-> s.replaceAll("\\u0000", ""))
+                .filter(arrayString -> !arrayString.isBlank())
+                .collect(Collectors.joining());
+    }
+}
