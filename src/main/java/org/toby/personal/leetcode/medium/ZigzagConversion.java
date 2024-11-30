@@ -38,10 +38,17 @@ public class ZigzagConversion
                 insertionIndex += 1;
             }
         }
-        return Arrays.stream(resultArrays)
-                .map(String::valueOf)
-                .map(s-> s.replaceAll("\\u0000", ""))
-                .filter(arrayString -> !arrayString.isBlank())
-                .collect(Collectors.joining());
+        final var resultBuilder = new StringBuilder();
+        for(int currentArrayIndex = 0; currentArrayIndex < numRows; currentArrayIndex++)
+        {
+            for (int currentValueIndex = 0; currentValueIndex< string.length(); currentValueIndex++)
+            {
+                if(resultArrays[currentArrayIndex][currentValueIndex] != '\u0000')
+                {
+                    resultBuilder.append(resultArrays[currentArrayIndex][currentValueIndex]);
+                }
+            }
+        }
+        return resultBuilder.toString();
     }
 }
