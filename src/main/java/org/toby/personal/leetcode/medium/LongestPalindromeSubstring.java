@@ -28,39 +28,8 @@ public class LongestPalindromeSubstring
 
     private static String getLongestPivotPalindrome(final String fullString, final int pivotIndex)
     {
-        var pivotPalindromeChar = getStringAtIndex(fullString, pivotIndex);
-        var isPivotPalindromeAllPivotChars = true;
         var pivotPalindrome = new StringBuilder(getStringAtIndex(fullString, pivotIndex));
-        var palindromeSearchCount = 1;
-        while (shouldContinuePalindromeSearch(pivotIndex, palindromeSearchCount, fullString.length()))
-        {
-            final var nextLhsChar = getStringAtIndex(fullString, pivotIndex - palindromeSearchCount);
-            final var nextRhsChar = getStringAtIndex(fullString, pivotIndex + palindromeSearchCount);
-            if(nextLhsChar.equals(nextRhsChar))
-            {
-                pivotPalindrome = new StringBuilder(nextLhsChar + pivotPalindrome + nextRhsChar);
-                if(!nextLhsChar.equals(pivotPalindromeChar))
-                {
-                    isPivotPalindromeAllPivotChars = false;
-                }
-                palindromeSearchCount++;
-            }
-            else if (isPivotPalindromeAllPivotChars && nextLhsChar.equals(pivotPalindromeChar))
-            {
-                pivotPalindrome.insert(0, nextLhsChar);
-                return pivotPalindrome.toString();
-            }
-            else if (isPivotPalindromeAllPivotChars && nextRhsChar.equals(pivotPalindromeChar))
-            {
-                pivotPalindrome.insert(pivotPalindrome.length(), nextRhsChar);
-                return pivotPalindrome.toString();
-            }
-            else
-            {
-                return pivotPalindrome.toString();
-            }
-        }
-        return pivotPalindrome.toString();
+        return getLongestPivotPalindrome(fullString, pivotIndex, pivotPalindrome);
     }
 
     private static String getLongestPivotPairPalindrome(final String fullString, final int pivotIndex)
@@ -70,43 +39,50 @@ public class LongestPalindromeSubstring
         {
             return "";
         }
-        var isPivotPalindromeAllPivotChars = true;
         var pivotPalindrome = new StringBuilder(pivotStringAtIndex).append(pivotStringAtIndex);
-        var palindromeSearchCount = 1;
+        return getLongestPivotPalindrome(fullString, pivotIndex, pivotPalindrome);
+    }
+
+    private static String getLongestPivotPalindrome(final String fullString, final int pivotIndex, StringBuilder pivotPalindromeBuilder)
+    {
+        var pivotSize = pivotPalindromeBuilder.length();
+        var pivotPalindromeChar = getStringAtIndex(fullString, pivotIndex);
+        var isPivotPalindromeAllPivotChars = true;
+        var palindromeSearchCount = 0;
         while (shouldContinuePalindromeSearch(pivotIndex, palindromeSearchCount, fullString.length()))
         {
-            final var nextLhsChar = getStringAtIndex(fullString, pivotIndex - palindromeSearchCount);
-            final var nextRhsChar = getStringAtIndex(fullString, pivotIndex + palindromeSearchCount + 1);
+            final var nextLhsChar = getStringAtIndex(fullString, pivotIndex - palindromeSearchCount - 1);
+            final var nextRhsChar = getStringAtIndex(fullString, pivotIndex + palindromeSearchCount + pivotSize);
             if(nextLhsChar.equals(nextRhsChar))
             {
-                pivotPalindrome = new StringBuilder(nextLhsChar + pivotPalindrome + nextRhsChar);
-                if(!nextLhsChar.equals(pivotStringAtIndex))
+                pivotPalindromeBuilder = new StringBuilder(nextLhsChar + pivotPalindromeBuilder + nextRhsChar);
+                if(!nextLhsChar.equals(pivotPalindromeChar))
                 {
                     isPivotPalindromeAllPivotChars = false;
                 }
                 palindromeSearchCount++;
             }
-            else if (isPivotPalindromeAllPivotChars && nextLhsChar.equals(pivotStringAtIndex))
+            else if (isPivotPalindromeAllPivotChars && nextLhsChar.equals(pivotPalindromeChar))
             {
-                pivotPalindrome.insert(0, nextLhsChar);
-                return pivotPalindrome.toString();
+                pivotPalindromeBuilder.insert(0, nextLhsChar);
+                return pivotPalindromeBuilder.toString();
             }
-            else if (isPivotPalindromeAllPivotChars && nextRhsChar.equals(pivotStringAtIndex))
+            else if (isPivotPalindromeAllPivotChars && nextRhsChar.equals(pivotPalindromeChar))
             {
-                pivotPalindrome.insert(pivotPalindrome.length(), nextRhsChar);
-                return pivotPalindrome.toString();
+                pivotPalindromeBuilder.insert(pivotPalindromeBuilder.length(), nextRhsChar);
+                return pivotPalindromeBuilder.toString();
             }
             else
             {
-                return pivotPalindrome.toString();
+                return pivotPalindromeBuilder.toString();
             }
         }
-        return pivotPalindrome.toString();
+        return pivotPalindromeBuilder.toString();
     }
 
     private static boolean shouldContinuePalindromeSearch(final int pivotIndex, final int searchCount, final int searchLimitUpperBoundary)
     {
-        return pivotIndex - searchCount > -1 || pivotIndex + searchCount < searchLimitUpperBoundary;
+        return pivotIndex - searchCount > 0 || pivotIndex + searchCount < searchLimitUpperBoundary;
     }
 
     private static String getStringAtIndex(final String string, final int index)
