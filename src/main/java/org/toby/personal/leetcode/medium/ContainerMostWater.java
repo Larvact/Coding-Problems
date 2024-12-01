@@ -4,18 +4,31 @@ public class ContainerMostWater
 {
     public static int maxArea(int[] height)
     {
-        var maximumArea = 0;
-        for(int lineFromRight = height.length - 1; lineFromRight > 0; lineFromRight--)
+        var lhsPointer = 0;
+        var rhsPointer = height.length - 1;
+        var currentWidth = rhsPointer - lhsPointer;
+        var maximumArea = currentWidth * Math.min(height[lhsPointer], height[rhsPointer]);
+
+        while (currentWidth > 0)
         {
-            for(int lineFromLeft = 0; lineFromLeft < lineFromRight; lineFromLeft++)
+            final var lhsHeight = height[lhsPointer];
+            final var rhsHeight = height[rhsPointer];
+            final var minimumHeight = Math.min(lhsHeight, rhsHeight);
+            final var localArea = minimumHeight * currentWidth;
+
+            if(localArea > maximumArea)
             {
-                final var smallestLine = Math.min(height[lineFromLeft], height[lineFromRight]);
-                final var area = smallestLine * Math.abs(lineFromRight - lineFromLeft);
-                if(area > maximumArea)
-                {
-                    maximumArea = area;
-                }
+                maximumArea = localArea;
             }
+            if(lhsHeight >= rhsHeight)
+            {
+                rhsPointer -= 1;
+            }
+            else
+            {
+                lhsPointer += 1;
+            }
+            currentWidth -= 1;
         }
         return maximumArea;
     }
