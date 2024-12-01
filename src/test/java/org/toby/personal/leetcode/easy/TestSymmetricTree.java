@@ -27,7 +27,7 @@ class TestSymmetricTree
     {
         final var secondLhsChild = new TreeNode(111);
         final var firstLhsChild = new TreeNode(6, secondLhsChild, null);
-        final var secondRhsChild = new TreeNode(6);
+        final var secondRhsChild = new TreeNode(60);
         final var firstRhsChild = new TreeNode(111, null, secondRhsChild);
         final var root = new TreeNode(1, firstLhsChild, firstRhsChild);
 
@@ -44,6 +44,18 @@ class TestSymmetricTree
         final var root = new TreeNode(1, firstLhsChild, firstRhsChild);
 
         Assertions.assertTrue(SymmetricTree.isSymmetric(root));
+    }
+
+    @Test
+    void nonSymmetricBinaryTreeWithNullAtLeaf_isSymmetric_returnFalse()
+    {
+        final var firstLhsGrandChild = new TreeNode(2);
+        final var firstLhsChild = new TreeNode(2, firstLhsGrandChild, null);
+        final var secondLhsGrandChild = new TreeNode(2);
+        final var firstRhsChild = new TreeNode(2, secondLhsGrandChild, null);
+        final var root = new TreeNode(1, firstLhsChild, firstRhsChild);
+
+        Assertions.assertFalse(SymmetricTree.isSymmetric(root));
     }
 
 }
