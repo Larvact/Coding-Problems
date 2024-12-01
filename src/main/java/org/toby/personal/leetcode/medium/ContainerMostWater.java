@@ -2,7 +2,7 @@ package org.toby.personal.leetcode.medium;
 
 public class ContainerMostWater
 {
-    public int maxArea(int[] height)
+    public static int maxArea(int[] height)
     {
         var maximumArea = 0;
         for(int lineFromRight = height.length - 1; lineFromRight > 0; lineFromRight--)
