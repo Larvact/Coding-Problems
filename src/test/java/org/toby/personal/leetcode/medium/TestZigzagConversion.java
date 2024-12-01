@@ -30,7 +30,7 @@ class TestZigzagConversion
     {
         return Stream.of(
                 Arguments.of("PAYPALISHIRING", 1, "PAYPALISHIRING"),
-                Arguments.of("PAYPALISHIRING", 2, "PYAIHRNAPLSIIG"), //? Verify manually if others pass
+                Arguments.of("PAYPALISHIRING", 2, "PYAIHRNAPLSIIG"),
                 Arguments.of("PAYPALISHIRING", 3, "PAHNAPLSIIGYIR"),
                 Arguments.of("PAYPALISHIRING", 4, "PINALSIGYAHRPI")
         );
