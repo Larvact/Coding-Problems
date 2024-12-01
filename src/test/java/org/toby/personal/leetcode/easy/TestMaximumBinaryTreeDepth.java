@@ -20,4 +20,22 @@ class TestMaximumBinaryTreeDepth
         Assertions.assertEquals(1, MaximumBinaryTreeDepth.maxDepth(root));
     }
 
+    @Test
+    void twoNodeLhsBinaryTree_maxDepth_returnZero()
+    {
+        final var firstLhsChild = new TreeNode(6);
+        final var root = new TreeNode(1, firstLhsChild, null);
+
+        Assertions.assertEquals(2, MaximumBinaryTreeDepth.maxDepth(root));
+    }
+
+    @Test
+    void twoNodeRhsBinaryTree_maxDepth_returnZero()
+    {
+        final var firstRhsChild = new TreeNode(6);
+        final var root = new TreeNode(1, null, firstRhsChild);
+
+        Assertions.assertEquals(2, MaximumBinaryTreeDepth.maxDepth(root));
+    }
+
 }

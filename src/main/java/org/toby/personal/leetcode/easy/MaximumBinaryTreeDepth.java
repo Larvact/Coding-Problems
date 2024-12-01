@@ -12,7 +12,7 @@ public class MaximumBinaryTreeDepth
         }
         else
         {
-            return 1;
+            return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
         }
     }
 }
