@@ -28,7 +28,8 @@ class TestValidateBinarySearchTree
                 Arguments.of(new TreeNode(10, new TreeNode(9), null), true),
                 Arguments.of(new TreeNode(10, null, new TreeNode(9)), false),
                 Arguments.of(new TreeNode(10, new TreeNode(9), new TreeNode(11)), true),
-                Arguments.of(new TreeNode(10, new TreeNode(10), new TreeNode(11)), false)
+                Arguments.of(new TreeNode(10, new TreeNode(10), new TreeNode(11)), false),
+                Arguments.of(new TreeNode(5, new TreeNode(4), new TreeNode(6, new TreeNode(3), new TreeNode(7))), false)
         );
     }
 
