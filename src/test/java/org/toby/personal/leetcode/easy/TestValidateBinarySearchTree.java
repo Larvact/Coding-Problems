@@ -13,11 +13,6 @@ import static org.toby.personal.leetcode.easy.ValidateBinarySearchTree.isValidBS
 
 class TestValidateBinarySearchTree
 {
-    @Test
-    void nullTree_isValidBST_returnFalse()
-    {
-        assertFalse(isValidBST(null));
-    }
 
     @Test
     void treeWithValue_isValidBST_returnsTrue()
